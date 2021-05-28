@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     </head>
 <body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark " style="background-color:rgb(70, 3, 133);">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" >
         <div class="container">
         <a class="navbar-brand" href="#">News APP</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +26,7 @@
               <a class="nav-link" data-link id='stocks' href="/stocks"> Stocks </a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link" data-link id='recos' href="/recos"> Recos </a>
+              <a class="nav-link" target="_blank" id='recos' href="https://economictimes.indiatimes.com/markets/stocks/recos"> Recos </a>
             </li>
             <li class="nav-item ">
               <a class="nav-link" data-link id='general' href="/general"> General </a>
@@ -55,7 +55,9 @@
       </nav>
 
       <div class="wrapper container1">
-    <h1>Testing</h1>
+        <div class="heading">
+          <h1 id="head"></h1> <span id="load">Loading.....</span><br>
+      </div>
     <hr>
     <script src="js/index.js"></script>
     <div id="app">

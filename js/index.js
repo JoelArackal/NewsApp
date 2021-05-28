@@ -32,7 +32,7 @@ async function fetch_from_MC(url)
         // var docArticle = doc.querySelector('article').innerHTML;
         var wrap = doc.getElementById('cagetory')
         var news = wrap.getElementsByClassName('clearfix')
-        console.log(news[0])
+        // console.log(news[0])
         for(item of news)
         {
         var head = item.querySelector('h2').querySelector('a')
@@ -42,8 +42,8 @@ async function fetch_from_MC(url)
         var desc = item.querySelector('p').innerHTML;
         // var desc = desc.slice(0,20);
         var date = item.querySelector('div span').innerHTML
-        console.log(head.innerHTML);
-        console.log(head.href)
+        // console.log(head.innerHTML);
+        // console.log(head.href)
         // console.log(img_url)
         document.getElementById('app').innerHTML+= `<div class="news-item">
                     <div class="image-wrap">
@@ -61,6 +61,60 @@ async function fetch_from_MC(url)
     }
     });
 }
+
+async function fetch_from_ET(url)
+{
+    fetch(url, { 
+        mode:'no-cors',
+        credentials: 'same-origin',
+    headers: {
+        'access-control-allow-credentials': true,
+        'access-control-allow-origin' : 'https://economictimes.indiatimes.com',
+        'user-agent' : 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko)' 
+        } }).then((resp) =>
+                {
+    return resp.text();
+}).then((html) => {
+    var parser = new DOMParser();
+
+        // Parse the text
+        var doc = parser.parseFromString(html, "text/html");
+
+        // You can now even select part of that html as you would in the regular DOM
+        // Example:
+        // var docArticle = doc.querySelector('article').innerHTML;
+        // var wrap = doc.getElementById('cagetory')
+        var news = doc.querySelectorAll('div.eachStory')
+        console.log(html)
+        for(item of news)
+        {
+        var head = item.querySelector('h3').querySelector('a')
+        var img_url = 'https://economictimes.indiatimes.com' + item.querySelector('a span img').getAttribute('data-original');
+        var heading = head.innerHTML;
+        var link =  head.href;
+        var desc = item.querySelector('p').innerHTML;
+        // var desc = desc.slice(0,20);
+        var date = item.querySelector('time').innerHTML
+        // console.log(head.innerHTML);
+        // console.log(head.href)
+        // console.log(img_url)
+        document.getElementById('app').innerHTML+= `<div class="news-item">
+                    <div class="image-wrap">
+                <img class="news-img" src="${img_url}" alt="" srcset="">
+            </div>
+            <div class="news-wrap">
+                <span class="date">${date}</span>
+                <a href="${link}" class="link" target="_blank"> <h3>${heading}</h3> </a> 
+                <p>${desc} <br>   
+                </p>
+            </div>
+            </div>
+            <br>
+            <div class="line"></div>`
+    }
+    });
+}
+
 
 const router = async () => {
     const routes = [
@@ -91,14 +145,16 @@ const router = async () => {
     console.log(news_urls[key[0]]);
     var urls = news_urls[key[0]]
 
+    document.getElementById('head').innerHTML = key[1];
     document.getElementById('app').innerHTML = '';
     
     for(url of urls)
     {
         if(url[1]==0)
         {
-            fetch_from_MC(url[0]);
+         fetch_from_MC(url[0]);
         }
+
     }
     
     // var content = await getHtml(key)

@@ -7,8 +7,25 @@
 
 h1
 {
-    color: red;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.heading
+{
+    display: flex;
+    align-items: center;
+    /* background-color: aqua; */
+}
+
+#load
+{
+    margin-left: 20px;
+    font-size: 1.2em;
+   font-weight: 450;
+   color: green;
+    display: none;
+}
+
 
 body
 {
@@ -41,6 +58,7 @@ h3
     margin-top: 70px;
     margin-bottom: 30px;
 }
+
 
 .news-item
 {
